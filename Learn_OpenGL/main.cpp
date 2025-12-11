@@ -19,7 +19,7 @@ int main(){
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT,GL_TRUE);
     
-    GLFWwindow* window = glfwCreateWindow(800, 600, "Learn OpenGL", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(800, 600, "Learn OpenGL", NULL, NULL); // Initialize window
     if (window == NULL){
         std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
@@ -32,14 +32,14 @@ int main(){
         return -1;
     }
     
-    glViewport(0, 0, 800, 600);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glViewport(0, 0, 800, 600); // Set window size
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback); // Handles resizing
     
     while (!glfwWindowShouldClose(window)){
         processInput(window);
         
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f); // Set window color
+        glClear(GL_COLOR_BUFFER_BIT); // Clear buffer every frame
         
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -58,3 +58,5 @@ void processInput(GLFWwindow* window){
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 }
+
+//I have no clue what most of this does
