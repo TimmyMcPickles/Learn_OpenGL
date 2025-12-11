@@ -6,6 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		B44C74842EEA9696001C9D01 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B44C74832EEA9696001C9D01 /* OpenGL.framework */; };
+		B44C74852EEA9939001C9D01 /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B44C74812EEA9572001C9D01 /* libglfw3.a */; };
+		B44C74872EEA99B6001C9D01 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B44C74862EEA99B6001C9D01 /* IOKit.framework */; };
+		B44C74892EEA99BC001C9D01 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B44C74882EEA99BC001C9D01 /* Cocoa.framework */; };
+		B44C748B2EEA99C9001C9D01 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B44C748A2EEA99C9001C9D01 /* CoreVideo.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		B44C74742EEA93BA001C9D01 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -20,6 +28,11 @@
 
 /* Begin PBXFileReference section */
 		B44C74762EEA93BA001C9D01 /* Learn_OpenGL */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Learn_OpenGL; sourceTree = BUILT_PRODUCTS_DIR; };
+		B44C74812EEA9572001C9D01 /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = "../../../../../../Libraries/glfw-3.4/build/src/Debug/libglfw3.a"; sourceTree = "<group>"; };
+		B44C74832EEA9696001C9D01 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		B44C74862EEA99B6001C9D01 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		B44C74882EEA99BC001C9D01 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		B44C748A2EEA99C9001C9D01 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -35,6 +48,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B44C74852EEA9939001C9D01 /* libglfw3.a in Frameworks */,
+				B44C748B2EEA99C9001C9D01 /* CoreVideo.framework in Frameworks */,
+				B44C74892EEA99BC001C9D01 /* Cocoa.framework in Frameworks */,
+				B44C74872EEA99B6001C9D01 /* IOKit.framework in Frameworks */,
+				B44C74842EEA9696001C9D01 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				B44C74782EEA93BA001C9D01 /* Learn_OpenGL */,
+				B44C74802EEA9572001C9D01 /* Frameworks */,
 				B44C74772EEA93BA001C9D01 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,6 +74,18 @@
 				B44C74762EEA93BA001C9D01 /* Learn_OpenGL */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		B44C74802EEA9572001C9D01 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B44C748A2EEA99C9001C9D01 /* CoreVideo.framework */,
+				B44C74882EEA99BC001C9D01 /* Cocoa.framework */,
+				B44C74862EEA99B6001C9D01 /* IOKit.framework */,
+				B44C74832EEA9696001C9D01 /* OpenGL.framework */,
+				B44C74812EEA9572001C9D01 /* libglfw3.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,20 +277,60 @@
 		B44C747E2EEA93BA001C9D01 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				AUTOMATION_APPLE_EVENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J7QJ9886Q2;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/ethanp/Libraries/glfw-3.4/include",
+					/Users/ethanp/Libraries/glad/include/,
+					/usr/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = "/Users/ethanp/Libraries/glfw-3.4/build/src/debug";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;
+				RUNTIME_EXCEPTION_ALLOW_JIT = NO;
+				RUNTIME_EXCEPTION_ALLOW_UNSIGNED_EXECUTABLE_MEMORY = NO;
+				RUNTIME_EXCEPTION_DEBUGGING_TOOL = NO;
+				RUNTIME_EXCEPTION_DISABLE_EXECUTABLE_PAGE_PROTECTION = NO;
+				RUNTIME_EXCEPTION_DISABLE_LIBRARY_VALIDATION = YES;
 			};
 			name = Debug;
 		};
 		B44C747F2EEA93BA001C9D01 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				AUTOMATION_APPLE_EVENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J7QJ9886Q2;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/ethanp/Libraries/glfw-3.4/include",
+					/Users/ethanp/Libraries/glad/include/,
+					/usr/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = "/Users/ethanp/Libraries/glfw-3.4/build/src/debug";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;
+				RUNTIME_EXCEPTION_ALLOW_JIT = NO;
+				RUNTIME_EXCEPTION_ALLOW_UNSIGNED_EXECUTABLE_MEMORY = NO;
+				RUNTIME_EXCEPTION_DEBUGGING_TOOL = NO;
+				RUNTIME_EXCEPTION_DISABLE_EXECUTABLE_PAGE_PROTECTION = NO;
+				RUNTIME_EXCEPTION_DISABLE_LIBRARY_VALIDATION = YES;
 			};
 			name = Release;
 		};
