@@ -32,6 +32,7 @@ int main(){
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT,GL_TRUE);
     
+    // Create glfw window
     GLFWwindow* window = glfwCreateWindow(800, 600, "Learn OpenGL", NULL, NULL); // Initialize window
     if (window == NULL){
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -39,12 +40,16 @@ int main(){
         return -1;
     }
     glfwMakeContextCurrent(window);
-    
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
+    // glad: Load all openGL function pointers.
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
-
+    
+    
+    // build and compile shader program
     unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
     glCompileShader(vertexShader);
@@ -73,7 +78,7 @@ int main(){
     glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
     if (!success){
         glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-        std::cout << "ERROR::PROGRAM::SHADER::COMPILATION_FAILED\n" << infoLog << std::endl;
+        std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
     }
 
     glDeleteShader(vertexShader);
@@ -88,8 +93,8 @@ int main(){
     unsigned int VBO;       // Create vertex buffer objects
     unsigned int VAO;
     
-    glGenBuffers(1, &VBO);  // Generate said buffer
     glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);  // Generate said buffer
     
     glBindVertexArray(VAO);
 
@@ -100,12 +105,6 @@ int main(){
     glEnableVertexAttribArray(0);
     
     glBindVertexArray(0);
-    
-    
-
-    
-    glViewport(0, 0, 800, 600); // Set window size
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback); // Handles resizing
     
     while (!glfwWindowShouldClose(window)){
         processInput(window);
