@@ -32,22 +32,23 @@ int main(){
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT,GL_TRUE);
     
-    float vertices[] = {
-        -0.5f, -0.5f, 0.0f,
-         0.5f, -0.5f, 0.0f,
-         0.0f,  0.5f, 0.0f
-    };
+    GLFWwindow* window = glfwCreateWindow(800, 600, "Learn OpenGL", NULL, NULL); // Initialize window
+    if (window == NULL){
+        std::cout << "Failed to create GLFW window" << std::endl;
+        glfwTerminate();
+        return -1;
+    }
+    glfwMakeContextCurrent(window);
     
-    unsigned int VBO;       // Create vertex buffer objects
-    glGenBuffers(1, &VBO);  // Generate said buffer
-    glBindBuffer(GL_ARRAY_BUFFER, VBO); // Bind VBO to array buffer
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    
-    unsigned int vertexShader;
-    vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
+        std::cout << "Failed to initialize GLAD" << std::endl;
+        return -1;
+    }
+
+    unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
     glCompileShader(vertexShader);
-    
+
     unsigned int fragmentShader;
     fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
@@ -75,25 +76,33 @@ int main(){
         std::cout << "ERROR::PROGRAM::SHADER::COMPILATION_FAILED\n" << infoLog << std::endl;
     }
 
-    GLFWwindow* window = glfwCreateWindow(800, 600, "Learn OpenGL", NULL, NULL); // Initialize window
-    if (window == NULL){
-        std::cout << "Failed to create GLFW window" << std::endl;
-        glfwTerminate();
-        return -1;
-    }
-    glfwMakeContextCurrent(window);
-    
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
-        std::cout << "Failed to initialize GLAD" << std::endl;
-        return -1;
-    }
-    
-    glUseProgram(shaderProgram);
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
     
+    float vertices[] = {
+        -0.5f, -0.5f, 0.0f,
+         0.5f, -0.5f, 0.0f,
+         0.0f,  0.5f, 0.0f
+    };
+    
+    unsigned int VBO;       // Create vertex buffer objects
+    unsigned int VAO;
+    
+    glGenBuffers(1, &VBO);  // Generate said buffer
+    glGenVertexArrays(1, &VAO);
+    
+    glBindVertexArray(VAO);
+
+    glBindBuffer(GL_ARRAY_BUFFER, VBO); // Bind VBO to array buffer
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
+    
+    glBindVertexArray(0);
+    
+    
+
     
     glViewport(0, 0, 800, 600); // Set window size
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback); // Handles resizing
@@ -104,9 +113,17 @@ int main(){
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f); // Set window color
         glClear(GL_COLOR_BUFFER_BIT); // Clear buffer every frame
         
+        glUseProgram(shaderProgram);
+        glBindVertexArray(VAO);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+    
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+    glDeleteProgram(shaderProgram);
     
     glfwTerminate();
     
